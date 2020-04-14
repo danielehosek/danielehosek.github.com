@@ -1,29 +1,33 @@
 ---
 layout: post
-title:  "Welcome to Jekyll!"
+title:  "Variable 'x' of type referenced from scope, but it is not defined."
 date:   2020-04-14 20:53:30 +0200
-categories: jekyll update
+categories: dotnet csharp
 ---
-You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run `jekyll serve`, which launches a web server and auto-regenerates your site when a file is updated.
+Expressions Trees give us an ability to write executable code different way than used to but sometimes you can end up at the very beggining while trying out. Have a look at a given example below.
 
-Jekyll requires blog post files to be named according to the following format:
-
-`YEAR-MONTH-DAY-title.MARKUP`
-
-Where `YEAR` is a four-digit number, `MONTH` and `DAY` are both two-digit numbers, and `MARKUP` is the file extension representing the format used in the file. After that, include the necessary front matter. Take a look at the source for this post to get an idea about how it works.
-
-Jekyll also offers powerful support for code snippets:
-
-{% highlight ruby %}
-def print_hi(name)
-  puts "Hi, #{name}"
-end
-print_hi('Tom')
-#=> prints 'Hi, Tom' to STDOUT.
+{% highlight java %}
+Expression<Func<Car, bool>> isRed = x => x.Color == "Red";
+Expression<Func<Car, bool>> isCheap = x => x.Price < 10.0;
+Expression<Func<Car, bool>> isRedOrCheap = Expression.Lambda<Func<Car, bool>>(
+    Expression.Or(isRed.Body, isCheap.Body), isRed.Parameters.Single());
+var compiled = isRedOrCheap.Compile();
 {% endhighlight %}
 
-Check out the [Jekyll docs][jekyll-docs] for more info on how to get the most out of Jekyll. File all bugs/feature requests at [Jekyll’s GitHub repo][jekyll-gh]. If you have questions, you can ask them on [Jekyll Talk][jekyll-talk].
+We have two functions checking its single property of a car but suddenly a business requirement changed and a developer is asked to check both of the properties at once. Looks simple and fine at first sight but results in a runtime error.
 
-[jekyll-docs]: https://jekyllrb.com/docs/home
-[jekyll-gh]:   https://github.com/jekyll/jekyll
-[jekyll-talk]: https://talk.jekyllrb.com/
+{% highlight java %}
+variable 'x' of type referenced from scope, but it is not defined
+{% endhighlight %}
+
+Of course the developer could've solved that business requirement by reimplementing whole code to
+
+{% highlight java %}
+Func<Car, bool> isRed = x => x.Color == "Red";
+Func<Car, bool> isCheap = x => x.Price < 10.0;
+Func<Car, bool> isRedOrCheap = x => isRed(x) || isCheap(x);
+{% endhighlight %}
+
+and runtime would not have complained, but let's stick with a fact that he had no choice and I also have a good reason due to upcoming blog posts.
+
+The problem is that 'x' parameter of 'isRed' expression function is not the same as 'x' parameter of 'isCheap' one. Therefore, Expression Trees do not compare parameters by their names, but references. Another problem is that we are not able to fix it without introducing more then 10 lines of code.
