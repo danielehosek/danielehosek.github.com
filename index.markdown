@@ -20,11 +20,10 @@ layout: page
       <div>
       {{ post.excerpt }} <!-- bad! content gives you rendered html and you will truncate in the middle of a node -->
       </div>
-      <h4><a href="{{ post.url }}">read more</a></h4>
+      <h4><a href="{{ post.url }}">>> read more</a></h4>
    {% else %}
       {{ post.content }}
    {% endif %}
-   <hr>
 {% endfor %}
 </div>
     
