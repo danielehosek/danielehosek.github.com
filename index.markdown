@@ -21,9 +21,9 @@ layout: page
       {% endif %}
       </p>
    </header>
-   {% if post.content.size > 2000 %}
+   {% if post.content.size > 1000 %}
       <div>
-      {{ post.excerpt }} <!-- bad! content gives you rendered html and you will truncate in the middle of a node -->
+      {{ post.excerpt }}
       </div>
       <h4><a href="{{ post.url }}">>> read more</a></h4>
    {% else %}
