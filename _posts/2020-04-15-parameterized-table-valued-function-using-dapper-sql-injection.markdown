@@ -29,4 +29,4 @@ command.Parameters.Add(parameter);
 command.ExecuteReader();
 {% endhighlight %}
 
-This can be solved by creating `IDbDataParameter` bound to `IDbCommand` guaranteeing type transparency and SQL Prevention.
+This can be solved by creating `IDbDataParameter` bound to `IDbCommand` guaranteeing type transparency and prevention of SQL Injection.
