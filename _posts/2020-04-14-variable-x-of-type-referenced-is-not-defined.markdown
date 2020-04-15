@@ -9,8 +9,7 @@ Expressions Trees give us an ability to write executable code different way than
 {% highlight java %}
 Expression<Func<Car, bool>> isRed = x => x.Color == "Red";
 Expression<Func<Car, bool>> isCheap = x => x.Price < 1000.0;
-Expression<Func<Car, bool>> isRedOrCheap = Expression.Lambda<Func<Car, bool>>(
-    Expression.Or(isRed.Body, isCheap.Body), isRed.Parameters.Single());
+Expression<Func<Car, bool>> isRedOrCheap = Expression.Lambda<Func<Car, bool>>(Expression.Or(isRed.Body, isCheap.Body), isRedParameters.Single());
 var compiled = isRedOrCheap.Compile();
 {% endhighlight %}
 
