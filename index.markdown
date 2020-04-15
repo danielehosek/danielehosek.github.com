@@ -5,12 +5,17 @@
 layout: page
 ---
 
-<h2>Latest Posts</h2>
 
 <div id="posts">
 
 {% for post in site.posts limit:10 %}
-   <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
+   <header class="post-header">
+      <h2 class="post-title p-name">{{ post.title }}</h2>
+      <p class="post-meta">
+         <time class="dt-published">{{post.date | date: "%B %-d, %Y" }}
+         </time>
+      </p>
+   </header>
    {% if post.content.size > 2000 %}
       <div>
       {{ post.excerpt }} <!-- bad! content gives you rendered html and you will truncate in the middle of a node -->
