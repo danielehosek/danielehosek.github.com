@@ -3,6 +3,7 @@ layout: post
 title:  "InvalidOperationException: Variable 'x' of type referenced from scope, but it is not defined."
 date:   2020-04-14 20:53:30 +0200
 categories: [csharp]
+author: Daniele Hosek
 ---
 Expressions Trees give us an ability to write executable code different way than used to but sometimes you can end up at the very beginning while trying out. Have a look at a given example below.
 

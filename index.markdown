@@ -14,6 +14,11 @@ layout: page
       <p class="post-meta">
          <time class="dt-published">{{post.date | date: "%B %-d, %Y" }}
          </time>
+               {% if post.author %}
+        • <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-author h-card" itemprop="name">{{ post.author }}</span>
+        </span>
+      {% endif %}
       </p>
    </header>
    {% if post.content.size > 2000 %}

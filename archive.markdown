@@ -19,7 +19,11 @@ title: Archive
     <article class="archive-item">
       <p class="post-meta">
          <time class="dt-published">{{post.date | date: "%B %-d, %Y" }}
-         </time> -
+         </time> {% if post.author %}
+        • <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-author h-card" itemprop="name">{{ post.author }}</span>
+        </span>
+      {% endif %} - 
       <a href="{{ site.baseurl }}{{ post.url }}">{{post.title}}</a></p>
     </article>
     {% endfor %}
