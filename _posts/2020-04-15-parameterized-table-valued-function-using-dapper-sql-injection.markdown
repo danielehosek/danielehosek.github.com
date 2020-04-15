@@ -5,7 +5,7 @@ date:   2020-04-15 19:00:00 +0200
 categories: [csharp]
 author: Daniele Hosek
 ---
-Using SQL Parameters does not only help readability, it also **helps to prevent SQL Injection**. What you typically do is binding key-value pairs of input parameters using `DynamicParameters` object of `Dapper` namespace in case of classic SQL SELECT which results in `SELECT * FROM [Table] WHERE [Column] = @Value`. Actually, this does not apply for Table Valued Function since it does not have the already mentioned key-value pairs, **but a value**. There is not an article or a tutorial on the internet explaining how to execute Table Valued Function with an input parameter without openning a door for the devil called SQL Injection.  
+Using SQL Parameters **helps to prevent SQL Injection**. What you typically do is binding key-value pairs of input parameters using `DynamicParameters` object of `Dapper` namespace in case of classic SQL SELECT which results in `SELECT * FROM [Table] WHERE [Column] = @Value`. Actually, this does not apply for Table Valued Function since it does not have the already mentioned key-value pairs, **but a value**. There is not an article or a tutorial on the internet explaining how to execute Table Valued Function with an input parameter without openning a door for the devil called SQL Injection.  
 
 {% highlight csharp %}
 var searchParameter = "value"; // a value obtained by a user via UI
