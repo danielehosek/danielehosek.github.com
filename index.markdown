@@ -10,6 +10,7 @@ layout: page
 
 {% for post in site.posts limit:10 %}
    <header class="post-header">
+   <small>[{{ post.categories }}]</small>
       <h2 class="post-title p-name">{{ post.title }}</h2>
       <p class="post-meta">
          <time class="dt-published">{{post.date | date: "%B %-d, %Y" }}
